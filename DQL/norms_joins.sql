@@ -19,17 +19,11 @@ FOREIGN KEY (user_id) REFERENCES customer(customer_id),
 FOREIGN KEY (product_id) REFERENCES product(product_id)
 );
 INSERT INTO customer (customer_name, customer_mobile)
-VALUES ('Arun', '9876543210'),('Priya', '9123456780'),('Karthik R', '9789012345');
+VALUES ('Arun', '9876543210'),('Priya', '9123456780'),('Karthik R', '9789012345'), ('Nandhini','7856487185'),('Anu','9876543212');
 INSERT INTO product (product_name, product_price)
-VALUES('Mobile Phone', 15000),('Laptop', 55000),('Headphones', 2000);
-INSERT INTO orders (user_id, product_id, order_date)
-VALUES(1, 1, NOW()),(2, 2, NOW()),(3, 3, NOW());
-INSERT INTO customer (customer_name, customer_mobile)
-VALUES('Divya M', '9098765432'),('Rahul S', '9012345678');
-INSERT INTO product (product_name, product_price)
-VALUES('Smart Watch', 4500),('Bluetooth Speaker', 3500);
-INSERT INTO orders (user_id, product_id, order_date)
-VALUES(4, 4, NOW()),(5, 5, NOW());
+VALUES('Mobile Phone', 15000),('Laptop', 55000),('Headphones', 2000),('Smart watch',2000),('Bluetooth Speaker',3500);
+INSERT INTO orders (user_id, product_id, order_date) 
+VALUES(1, 2, NOW()),(2, 1, NOW()),(3, 4, NOW()),(1, 3, NOW()),(4, 2, NOW());
 
 
 SELECT * FROM customer;
@@ -57,10 +51,26 @@ select * from students;
 select * from courses;
 select * from student_courses;
 
-SELECT c.customer_name,p.product_name,o.order_date
-FROM orders o INNER JOIN customer c ON o.user_id = c.customer_id INNER JOIN product p ON o.product_id = p.product_id;
-SELECT p.product_name, p.product_price,COUNT(o.orderid) AS total_orders
-FROM product p LEFT JOIN orders o ON p.product_id = o.product_id GROUP BY p.product_id, p.product_name, p.product_price;
+SELECT 
+    c.customer_name,
+    p.product_name,
+    o.order_date
+FROM orders o
+INNER JOIN customer c ON o.user_id = c.customer_id
+INNER JOIN product p ON o.product_id = p.product_id;
+
+SELECT 
+    p.product_name,
+    p.product_price,
+    COUNT(o.orderid) AS total_orders
+FROM product p
+INNER JOIN orders o 
+    ON p.product_id = o.product_id
+GROUP BY 
+    p.product_id, p.product_name, p.product_price;
+
+
+
 
 SELECT p.product_id, p.product_name,p.product_price,o.orderid AS ordered_or_not
 FROM product p LEFT JOIN orders o ON p.product_id = o.product_id;
