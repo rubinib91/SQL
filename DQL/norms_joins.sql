@@ -51,32 +51,16 @@ select * from students;
 select * from courses;
 select * from student_courses;
 
-SELECT 
-    c.customer_name,
-    p.product_name,
-    o.order_date
-FROM orders o
-INNER JOIN customer c ON o.user_id = c.customer_id
-INNER JOIN product p ON o.product_id = p.product_id;
+SELECT c.customer_name,p.product_name,o.order_date
+FROM orders o INNER JOIN customer c ON o.user_id = c.customer_id INNER JOIN product p ON o.product_id = p.product_id;
 
-SELECT 
-    p.product_name,
-    p.product_price,
-    COUNT(o.orderid) AS total_orders
-FROM product p
-INNER JOIN orders o 
-    ON p.product_id = o.product_id
-GROUP BY 
-    p.product_id, p.product_name, p.product_price;
+SELECT p.product_name,p.product_price,COUNT(o.orderid) AS total_orders
+FROM product p INNER JOIN orders o ON p.product_id = o.product_id
+GROUP BY p.product_id, p.product_name, p.product_price;
 
 
 
 
-SELECT p.product_id, p.product_name,p.product_price,o.orderid AS ordered_or_not
-FROM product p LEFT JOIN orders o ON p.product_id = o.product_id;
-
-SELECT o.orderid,o.order_date,p.product_id,p.product_name,p.product_price
-FROM product p RIGHT JOIN orders o ON p.product_id = o.product_id;
 
 
 
